@@ -6,39 +6,23 @@
       xmlns:p="http://primefaces.org/ui">
 
 
-<script type="text/javascript">
+    <ui:composition template="/lineItem-template.xhtml">
 
-    function zoomIt(it) {
-        
-        if(it.width === 50 ){
-        it.width *= "10";
-        it.height *= "10";
-        //alert(drawing);
-    }
-    else{
-        it.width = "50";
-        it.height = "50";
-    }
-       
-       
-    }
-</script>
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-            </f:facet>
-        </h:head>
+
         <ui:define name="title">Dodaj skany sprawy #{orderManager.currentOrder}</ui:define>
-        <h:body>
+
+
+        <ui:define name="body">
+
+
 
 
 
 
             <h:form>
-                <h:dataTable var="lineItem"
+                <h:dataTable class="table table-hover"
+                             var="lineItem"
                              summary="Wykaz skanów"
                              value="#{orderManager.lineItems}"
                              rules="all"
@@ -64,7 +48,9 @@
                 </h:dataTable>
                 <br />
 
-                <h:dataTable id="orderPartsTable"
+                <h:dataTable 
+                             class="table table-hover"
+                             id="orderPartsTable"
                              summary="Wykaz skanów"
                              value="#{orderManager.newOrderParts}"
                              var="part"
@@ -93,7 +79,7 @@
                         <f:facet name="header">
                             <h:outputText value="Dodaj do sprawy" />
                         </f:facet>
-                        <h:commandButton value="Dodaj" action="#{orderManager.addLineItem}">
+                        <h:commandButton class="btn btn-success" value="Dodaj" action="#{orderManager.addLineItem}">
                             <f:setPropertyActionListener target="#{orderManager.selectedPartNumber}" value="#{part.partNumber}" />
                             <f:setPropertyActionListener target="#{orderManager.selectedPartRevision}" value="#{part.revision}" />
                             <f:setPropertyActionListener target="#{orderManager.selectedVendorPartNumber}" value="#{part.vendorPart.vendorPartNumber}" />
@@ -105,9 +91,9 @@
                             <h:outputText value="Akcje" />
                         </f:facet>
                         <h:form>
-                            <h:commandLink value="Usuń" actionListener="#{orderManager.removeLineItem}" action="lineItem">
+                            <h:commandButton class="btn btn-danger" value="Usuń" actionListener="#{orderManager.removeLineItem}" action="welcomePrimefaces">
                                 <f:param name="deleteItemId" id="deleteItemId" value="#{part.partNumber}" />
-                            </h:commandLink>
+                            </h:commandButton>
                         </h:form>
 
                     </h:column>
@@ -118,37 +104,29 @@
 
             </h:form>
 
-            <!--            <h:form id="form" enctype="multipart/form-data">
-                            <h:column>
-            
-                                <h:inputFile value="Wrzuć plik" />
-                                <h:inputText value="{orderManager.url}" />
-                                <h:commandButton value="Dodaj obrazek" action="{orderManager.addPicture}"/>
-            
-            
-                            </h:column>
-            
-                        </h:form>-->
 
 
             <h:form>
 
                 <br />
-                <h:commandButton value="Powrót do menu" action="vscanner" />
-                
+                <h:commandButton class="btn btn-default" value="Powrót do menu" action="vscanner" />
+
             </h:form>
 
 
             <h:form>
-                <p:fileUpload fileUploadListener="#{orderManager.handleFileUpload}" mode="advanced" dragDropSupport="false"
+
+                <p:fileUpload fileUploadListener="#{orderManager.handleFileUpload}" value="#{orderManager.file}" mode="advanced" dragDropSupport="false"
                               update="messages" sizeLimit="1000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
                 <p:growl id="messages" showDetail="true" />
+                <h:inputText required="true" value="#{orderManager.selectedPartNumber}"></h:inputText>
+                <h:commandButton value="Dodaj obrazek" action="{orderManager.addPicture}"/>
             </h:form>
 
-        </h:body>
 
-    </f:view>
+
+        </ui:define>
+    </ui:composition>
 
 </html>
-

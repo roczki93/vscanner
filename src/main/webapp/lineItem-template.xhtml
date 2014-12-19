@@ -4,10 +4,12 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+    
+    
+    
     <h:head>
-        <script src="resources/lightbox/js/jquery-1.11.0.min.js"></script>
-	<script src="resources/lightbox/js/lightbox.min.js"></script>
-        <link href="resources/lightbox/css/lightbox.css" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="default.css"/>
 <script type="text/javascript">
 
     function zoomIt(it) {
@@ -25,13 +27,20 @@
        
     }
 </script>
-        <title>Order Persistence Example</title>
-        <h:outputStylesheet library="css" name="default.css"/>
+        
+        
+        
+             <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Order Persistence Example</title>
+            </f:facet>
+        
     </h:head>
+    
+    
     <body>
         <h1><ui:insert name="title">Default Title</ui:insert></h1>
 
         <ui:insert name="body">Default Body</ui:insert>
     </body>
 </html>
-

@@ -20,6 +20,7 @@
         <ui:define name="ordersTable">
 
             <h:dataTable
+                class="table table-hover"
                 var="order"
                 summary="Table of orders"
                 value="#{orderManager.orders}"
@@ -30,7 +31,7 @@
                         <h:outputText value="Numer sprawy" />
                     </f:facet>
                     <h:form>
-                        <h:commandLink id="order_id_link" action="lineItem">
+                        <h:commandLink  class="btn btn-default" id="order_id_link" action="welcomePrimefaces">
                             <h:outputText value="#{order.orderId}" />
                             <f:setPropertyActionListener target="#{orderManager.currentOrder}" value="#{order.orderId}" />
                         </h:commandLink>
@@ -65,7 +66,7 @@
                         <h:outputText value="Akcje" />
                     </f:facet>
                     <h:form>
-                        <h:commandLink value="Usuń" actionListener="#{orderManager.removeOrder}" action="vscanner">
+                        <h:commandLink class="btn btn-danger" value="Usuń" actionListener="#{orderManager.removeOrder}" action="vscanner">
                             <f:param name="deleteOrderId" id="deleteOrderId" value="#{order.orderId}" />
                         </h:commandLink>
                     </h:form>
@@ -75,7 +76,7 @@
 
         <ui:define name="newOrderForm">
             <h:form>
-                <h:outputLabel for="orderIdInputText" rendered="true" value="Order ID: " />
+                <h:outputLabel for="orderIdInputText" rendered="true" value="Numer sprawy: " />
                 <h:inputText id="orderIdInputText" required="true" value="#{orderManager.newOrderId}" /><br />
 
 
@@ -97,7 +98,7 @@
                     <f:selectItem itemValue="0" itemLabel="0" />
                 </h:selectOneMenu><br />
 
-                <h:commandButton value="Submit" action="#{orderManager.submitOrder}" />
+                <h:commandButton class="btn btn-success" value="Wyślij" action="#{orderManager.submitOrder}" />
             </h:form>
 
         </ui:define>
@@ -106,7 +107,7 @@
             <h:form>
                 <h:outputLabel for="findVendorInputText" rendered="true" value="Szukaj: " />
                 <h:inputText id="findVendorInputText" value="#{orderManager.vendorName}" required="true" />
-                <h:commandButton id="findVendorButton" action="#{orderManager.findVendor}" value="Znajdź" />
+                <h:commandButton class="btn btn-default" id="findVendorButton" action="#{orderManager.findVendor}" value="Znajdź" />
             </h:form>
         </ui:define>
 
@@ -128,4 +129,3 @@
         </ui:define>
     </ui:composition>
 </html>
-
